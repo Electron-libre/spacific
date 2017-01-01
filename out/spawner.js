@@ -3,10 +3,10 @@ var spawner =  {
         var harvesters = _.filter(creeps, { memory: {role: 'harvester'} });
         var upgraders = _.filter(creeps, {memory: {role: 'upgrader'}});
         if (Object.keys(harvesters).length < 2) {
-            Game.spawns.SpawnA.createCreep([WORK, CARRY, MOVE], null, {memory: { role: 'harvester'}});
+            Game.spawns.SpawnA.createCreep([WORK, CARRY, MOVE], null, { role: 'harvester'});
         }
         if (Object.keys(upgraders).length < 1) {
-            Game.spawns.SpawnA.createCreep([WORK, CARRY, MOVE], null, {memory: { role: 'upgrader'}});
+            Game.spawns.SpawnA.createCreep([WORK, CARRY, MOVE], null, { role: 'upgrader'});
         }
     }
 };
