@@ -1,6 +1,6 @@
 var creepRegistry = {
     ligthWorker: [WORK, MOVE, MOVE, CARRY],
-    hardWorker: [WORK, WORK, WORK, CARRY, MOVE, MOVE],
+    hardWorker: [WORK, WORK, CARRY, MOVE, MOVE, MOVE],
     creepCrowd: {
         upgrader: {count: 1},
         harvester: {count: 2},
