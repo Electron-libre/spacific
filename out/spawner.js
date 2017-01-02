@@ -1,9 +1,9 @@
 var creepRegistry = require('creep.registry');
-function workerBuilder(creep) {
-    if (creep.room.controller.level > 1) {
-        creepRegistry.ligthWorker
+function workerBuilder() {
+    if (Game.spawns.SpawnA.energy < 350) {
+        return creepRegistry.ligthWorker
     } else {
-        creepRegistry.hardWorker
+        return creepRegistry.hardWorker
     }
 
 }
@@ -11,7 +11,7 @@ var spawner =  {
     spawn: function(creeps) {
         _.each(creepRegistry.creepCrowd, function (conf, role) {
             if (_.keys(_.filter(creeps, {memory: {role: role}})) < conf.count) {
-                Game.spawns.SpawnA.createCreep(workerBuilder(_.first(creeps)), null, {role: role});
+                Game.spawns.SpawnA.createCreep(workerBuilder, null, {role: role});
             }
         });
     }
