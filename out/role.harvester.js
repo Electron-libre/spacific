@@ -27,7 +27,7 @@ var roleHarvester = {
     },
 
     selectHarvestSource: function(creep) {
-        var sources = _.map(creep.room.find(FIND_SOURCES), {id} );
+        var sources = _.map(creep.room.find(FIND_SOURCES), 'id' );
         var harvestedSources = _.countBy(creep.room.creeps, function (creep) { creep.memory.harvestedSource });
         _.difference(sources, harvestedSources.key)[0] || _.min(_.pairs(harvestedSources, function(source) { return source[1]}))[0]
     },
