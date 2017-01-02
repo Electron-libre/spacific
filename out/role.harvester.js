@@ -11,6 +11,7 @@ var roleHarvester = {
                 roleHarvester.harvestOrMove(creep, roleHarvester.getHarvestedSource(creep));
             }
         } else {
+            creep.memory.harvestedSource = undefined;
             var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (structure.structureType == STRUCTURE_EXTENSION ||
@@ -26,19 +27,17 @@ var roleHarvester = {
         }
     },
 
+    /** Which node should I harvest **/
     selectHarvestSource: function(creep) {
         var sources = _.map(creep.room.find(FIND_SOURCES), 'id' );
-        console.log("current room sources " + sources);
-
-        var harvestedSources = _.countBy(creep.room.creeps, function (creep) { creep.memory.harvestedSource });
-        console.log("havested sources " +  harvestedSources)
-
+        var harvestedSources = _.countBy(creep.room.creeps, function (creep) {
+            creep.memory.harvestedSource });
         var notHarvestedSources = _.difference(sources, _.keys(harvestedSources));
-        console.log("not harvested sources " + notHarvestedSources);
+        var leastHarvestedSource = _.min(
+            _.pairs(harvestedSources, function(source) { return source[1]; })
+        )[0]
 
-        var leastHarvestedSource = _.min(_.pairs(harvestedSources, function(source) { return source[1]; }))[0]
-        console.log("least harvested source" + leastHarvestedSource);
-        (_.first(notHarvestedSources) || leastHarvestedSource || _.first(sources));
+        return (_.shuffle(notHarvestedSources)[0] || leastHarvestedSource || _.first(sources));
     },
 
     /** Harvest or move to the given source **/
