@@ -33,7 +33,7 @@ var roleHarvester = {
         var harvestedSources = _.countBy(creep.room.creeps, function (creep) { creep.memory.harvestedSource });
         console.log("havested sources " +  harvestedSources)
 
-        var notHarvestedSources = _.difference(sources, harvestedSources.key);
+        var notHarvestedSources = _.difference(sources, _.keys(harvestedSources));
         console.log("not harvested sources " + notHarvestedSources);
 
         var leastHarvestedSource = _.min(_.pairs(harvestedSources, function(source) { return source[1]; }))[0]
