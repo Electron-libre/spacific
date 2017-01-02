@@ -23,11 +23,6 @@ var roleUpgrader = {
                 creep.moveTo(sources[0]);
             }
         }
-    },
-
-    buildSmall: function(spawn) {
-        return spawn.createCreep([WORK, CARRY, MOVE, MOVE], null, {role: 'upgrader'});
-    }
-}
+    }};
 
 module.exports = roleUpgrader;
