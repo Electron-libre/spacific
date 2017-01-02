@@ -26,6 +26,10 @@ var roleBuilder = {
                 creep.moveTo(sources[0]);
             }
         }
+    },
+
+    buildSmall: function(spawn) {
+        return spawn.createCreep([WORK,CARRY,MOVE, MOVE], null, 'builder');
     }
 };
 

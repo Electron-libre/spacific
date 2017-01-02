@@ -50,8 +50,12 @@ var roleHarvester = {
     /** Return harvested source for given creep **/
     getHarvestedSource: function(creep) {
         return Game.getObjectById(creep.memory.harvestedSource);
-    }
+    },
 
+    /** Return small harvester build **/
+    buildSmall: function(spawn) {
+        return spawn.createCreep([WORK, CARRY, MOVE, MOVE], null, {role: 'harvester'});
+    }
 };
 
 module.exports = roleHarvester;
