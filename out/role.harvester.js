@@ -7,7 +7,7 @@ var roleHarvester = {
             if (currentHarvestSource) {
                 roleHarvester.harvestOrMove(creep, currentHarvestSource);
             } else {
-                creep.memory.harvestedSource = selectHarvestSource(creep);
+                creep.memory.harvestedSource = roleHarvester.selectHarvestSource(creep);
                 roleHarvester.harvestOrMove(creep, roleHarvester.getHarvestedSource(creep));
             }
         } else {
