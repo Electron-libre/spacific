@@ -2,10 +2,11 @@ var creepRegistry = {
     ligthWorker: [WORK, MOVE, MOVE, CARRY],
     hardWorker: [WORK, WORK, CARRY, MOVE, MOVE, MOVE],
     creepCrowd: {
-        upgrader: {count: 1},
-        harvester: {count: 2},
-        builder: {count: 3}
+        harvester: {count: 3},
+        upgrader: {count: 6},
+        builder: {count: 4}
     }
 }
 
 module.exports = creepRegistry;
+
