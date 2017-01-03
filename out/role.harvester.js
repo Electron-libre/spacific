@@ -1,3 +1,4 @@
+var roomSources = require('room.sources');
 var roleHarvester = {
 
     /** @param {Creep} creep **/
@@ -7,7 +8,7 @@ var roleHarvester = {
             if (currentHarvestSource) {
                 roleHarvester.harvestOrMove(creep, currentHarvestSource);
             } else {
-                creep.memory.harvestedSource = roleHarvester.selectHarvestSource(creep);
+                creep.memory.harvesting = roomSources.selectHarvestSource(creep.room);
                 roleHarvester.harvestOrMove(creep, roleHarvester.getHarvestedSource(creep));
             }
         } else {
@@ -30,19 +31,6 @@ var roleHarvester = {
         }
     },
 
-    /** Which node should I harvest **/
-    selectHarvestSource: function(creep) {
-        var sources = _.map(creep.room.find(FIND_SOURCES), 'id' );
-        var harvestedSources = _.countBy(creep.room.creeps, function (creep) {
-            creep.memory.harvestedSource });
-        var notHarvestedSources = _.difference(sources, _.keys(harvestedSources));
-        var leastHarvestedSource = _.min(
-            _.pairs(harvestedSources, function(source) { return source[1]; })
-        )[0]
-
-        return (_.shuffle(notHarvestedSources)[0] || leastHarvestedSource || _.first(sources));
-    },
-
     /** Harvest or move to the given source **/
     harvestOrMove: function(creep, source) {
         if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
@@ -52,7 +40,9 @@ var roleHarvester = {
 
     /** Return harvested source for given creep **/
     getHarvestedSource: function(creep) {
-        return Game.getObjectById(creep.memory.harvestedSource);
-    }};
+        return Game.getObjectById(creep.memory.harvesting);
+    },
+};
+
 
 module.exports = roleHarvester;
