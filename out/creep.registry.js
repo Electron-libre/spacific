@@ -3,7 +3,7 @@ var creepRegistry = {
     hardWorker: [WORK, WORK, CARRY, MOVE, MOVE, MOVE],
     creepCrowd: {
         harvester: {count: 3},
-        upgrader: {count: 6},
+        upgrader: {count: 4},
         builder: {count: 4}
     }
 }

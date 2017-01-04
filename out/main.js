@@ -22,15 +22,32 @@ module.exports.loop = function () {
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
-        if(creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
-        }
-        if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        }
-        if(creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
-        }
+        var spawn = Game.spawns.SpawnA;
+        if (creep.memory.renewing || creep.ticksToLive < 150) {
+            creep.memory.renewing = true;
+            switch (spawn.renewCreep(creep)) {
+                case ERR_NOT_IN_RANGE:
+                    creep.say('moving to renew');
+                    creep.moveTo(spawn.pos);
+                    break;
+                case ERR_FULL:
+                    creep.say('fully renewed');
+                    creep.memory.renewing = undefined;
+                    break;
+                default:
+                    creep.say('waiting');
+                    break;
+            }
+        } else {
+            if(creep.memory.role == 'harvester') {
+                roleHarvester.run(creep);
+            }
+            if(creep.memory.role == 'upgrader') {
+                roleUpgrader.run(creep);
+            }
+            if(creep.memory.role == 'builder') {
+                roleBuilder.run(creep);
+            }
     }
     spawner.spawn(Game.creeps);
 }

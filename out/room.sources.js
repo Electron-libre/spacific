@@ -7,7 +7,7 @@ var roomSources = {
 
     /** @return [Array(sources)] **/
     freeSources: function(room) {
-        return _.omit(activeSources(room), _.keys(harvestersCount));
+        return _.omit(this.activeSources(room), _.keys(this.harvestersCount(room)));
     },
 
     /** @return [Array(sources)]**/
@@ -17,9 +17,9 @@ var roomSources = {
 
     /** Which node should I harvest **/
     selectHarvestSource: function(room) {
-        return (_.first(_.shuffle(freeSources(room)))
-                || _.last(_.sortBy(_.pairs(harvestersCount(room)), (p) => { p[1] }))
-                || _.first(_.shuffle(activeSources))
+        return (_.first(_.shuffle(this.freeSources(room)))
+                || _.last(_.sortBy(_.pairs(this.harvestersCount(room)), (p) => { p[1] }))
+                || _.first(_.shuffle(this.activeSources(room)))
                );
     },
 }

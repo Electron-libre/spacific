@@ -8,11 +8,12 @@ var roleHarvester = {
             if (currentHarvestSource) {
                 roleHarvester.harvestOrMove(creep, currentHarvestSource);
             } else {
-                creep.memory.harvesting = roomSources.selectHarvestSource(creep.room);
-                roleHarvester.harvestOrMove(creep, roleHarvester.getHarvestedSource(creep));
+                var selected_source = roomSources.selectHarvestSource(creep.room);
+                creep.memory.harvesting = selected_source.id;
+                roleHarvester.harvestOrMove(creep, selected_source);
             }
         } else {
-            creep.memory.harvestedSource = undefined;
+            creep.memory.harvesting = undefined;
             var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return _.includes([
@@ -41,7 +42,7 @@ var roleHarvester = {
     /** Return harvested source for given creep **/
     getHarvestedSource: function(creep) {
         return Game.getObjectById(creep.memory.harvesting);
-    },
+    }
 };
 
 
